@@ -64,7 +64,7 @@ class LoadingUtil {
       _maxShowTimer?.cancel(); // 取消超时定时器
       _isShowing = false;
       if (Get.isDialogOpen ?? false) {
-        Get.back();
+        Get.back(closeOverlays: true);
       }
     }
   }
@@ -80,7 +80,7 @@ class LoadingUtil {
       _maxShowTimer?.cancel();
       _isShowing = false;
       if (Get.isDialogOpen ?? false) {
-        Get.back();
+        Get.back(closeOverlays: true);
       }
     }
   }

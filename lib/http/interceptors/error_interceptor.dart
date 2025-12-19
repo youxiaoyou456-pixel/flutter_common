@@ -5,7 +5,7 @@ import 'exceptions.dart';
 
 class ErrorInterceptor extends Interceptor {
   //是否将网络请求错误翻译成为详细描述，否则自行catch异常，自行翻译
-  bool isChangeNetWorkErrorToDetail = false;
+  bool isChangeNetWorkErrorToDetail = true;
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     AppException? appException;
@@ -55,7 +55,7 @@ class ErrorInterceptor extends Interceptor {
     final statusCode = err.response?.statusCode;
     final data = err.response?.data;
 
-
+    //RESTful 规范。但是基本没人用吧
     if (statusCode == 401) {
       return UnauthorizedException('登录已过期，请重新登录');
     } else if (statusCode == 403) {
@@ -66,7 +66,7 @@ class ErrorInterceptor extends Interceptor {
       return ServerException('服务器内部错误');
     } else if (data is Map<String, dynamic>) {
       // 处理业务错误
-      final code = data['code'];
+      final code = data['code']?? -999;
       final message = data['message'] ?? '请求失败';
       return BusinessException(message, code: code);
     } else {
