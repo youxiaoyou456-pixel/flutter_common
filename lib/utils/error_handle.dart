@@ -13,6 +13,8 @@ class ErrorHandle{
      } else if (error is Map && error['error'] is AppException) {
        // 或者根据你的封装格式判断
        message = (error['error'] as AppException).message;
+     } else if (error is String) {
+       message = error;
      } else {
        message = "error";
      }

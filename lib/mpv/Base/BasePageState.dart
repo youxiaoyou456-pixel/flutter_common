@@ -12,7 +12,6 @@ abstract class BasePageState<T extends StatefulWidget, P extends BasePresenter>
 
   late P presenter;
 
-
   @override
   void initState() {
     super.initState();
